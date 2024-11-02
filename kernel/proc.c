@@ -302,6 +302,10 @@ fork(void)
   // Cause fork to return 0 in the child.
   np->trapframe->a0 = 0;
 
+  // Copy the traced state and trace_mask from parent to child
+  np->traced = p->traced;
+  np->trace_mask = p->trace_mask;
+
   // increment reference counts on open file descriptors.
   for(i = 0; i < NOFILE; i++)
     if(p->ofile[i])
@@ -324,6 +328,7 @@ fork(void)
 
   return pid;
 }
+
 
 // Pass p's abandoned children to init.
 // Caller must hold wait_lock.
