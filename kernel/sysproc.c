@@ -95,6 +95,15 @@ sys_uptime(void)
 }
 
 uint64
+sys_trace(void)
+{
+    int mask;
+    argint(0, &mask);  // Gọi argint mà không so sánh giá trị trả về
+    myproc()->tracemask = mask;
+    return 0;
+}
+
+uint64
 sys_sysinfo(void){
   // Khai báo các biến
   struct proc *p = myproc();
@@ -114,6 +123,5 @@ sys_sysinfo(void){
     return -1;
     
   return 0;
-}
 
 
