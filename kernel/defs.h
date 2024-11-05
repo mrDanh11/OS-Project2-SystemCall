@@ -16,6 +16,7 @@ void            brelse(struct buf*);
 void            bwrite(struct buf*);
 void            bpin(struct buf*);
 void            bunpin(struct buf*);
+int            freemem(void);
 
 // console.c
 void            consoleinit(void);
@@ -69,6 +70,7 @@ void            initlog(int, struct superblock*);
 void            log_write(struct buf*);
 void            begin_op(void);
 void            end_op(void);
+int             nproc(void);
 
 // pipe.c
 int             pipealloc(struct file**, struct file**);

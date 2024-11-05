@@ -697,3 +697,18 @@ procdump(void)
     printf("\n");
   }
 }
+
+int
+nproc(void){
+  struct proc *p;
+  int n_proc = 0;
+
+  for (p = proc; p < &proc[NPROC]; p++){
+    acquire(&p->lock);
+    if (p->state != UNUSED)
+      n_proc++;
+    release(&p->lock);
+  }
+
+  return n_proc;
+}
